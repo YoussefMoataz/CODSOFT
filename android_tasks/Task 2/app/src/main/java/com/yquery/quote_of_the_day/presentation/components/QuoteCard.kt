@@ -33,7 +33,7 @@ fun QuoteCard(
 
     Card(
         modifier = Modifier
-            .padding(10.dp, 36.dp)
+            .padding(start = 10.dp, end = 10.dp, bottom = 8.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant

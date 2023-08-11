@@ -82,7 +82,7 @@ fun HomeScreen() {
 
             Column {
 
-                Spacer(modifier = Modifier.height(Dp(16F)))
+                Spacer(modifier = Modifier.height(Dp(10F)))
 
                 QuoteCard(quote = quote, isFavourite = isFavourite,
                           quoteShare = {
@@ -98,7 +98,7 @@ fun HomeScreen() {
                               quote?.let { quotesViewModel.changeFavouriteStatus(it) }
                           })
 
-                Spacer(modifier = Modifier.height(Dp(16F)))
+                Spacer(modifier = Modifier.height(Dp(8F)))
                 Divider()
 
                 LazyColumn {

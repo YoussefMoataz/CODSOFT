@@ -11,7 +11,7 @@ interface QuotesDao {
     @Query("SELECT _id FROM Quote")
     suspend fun getFavouritesIDs(): List<String>
 
-    @Query("SELECT * FROM Quote ORDER BY id ASC")
+    @Query("SELECT * FROM Quote ORDER BY id DESC")
     suspend fun getFavourites(): List<Quote>
 
     @Insert
