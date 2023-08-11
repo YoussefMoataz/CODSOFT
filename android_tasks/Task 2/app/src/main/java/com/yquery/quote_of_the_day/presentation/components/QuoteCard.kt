@@ -53,7 +53,7 @@ fun QuoteCard(
             Text(
                 text = "-${quote?.author}" ?: "",
                 modifier = Modifier
-                    .padding(14.dp)
+                    .padding(end = 14.dp, top = 4.dp, bottom = 2.dp)
                     .align(Alignment.End),
                 fontSize = MaterialTheme.typography.titleMedium.fontSize
             )
