@@ -1,5 +1,6 @@
 package com.yquery.quote_of_the_day.presentation
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -26,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yquery.quote_of_the_day.R
@@ -45,6 +47,8 @@ fun HomeScreen() {
     val pullRefreshState = rememberPullRefreshState(
         refreshing = refreshing,
         onRefresh = { quotesViewModel.refreshQuote() })
+
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -80,7 +84,15 @@ fun HomeScreen() {
 
             Column {
 
-                QuoteCard(quote = quote)
+                QuoteCard(quote = quote, quoteCardLongClicked = {
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, quote?.content)
+                        type = "text/plain"
+                    }
+
+                    context.startActivity(Intent.createChooser(sendIntent, null))
+                })
 
                 Divider()
 
@@ -89,9 +101,6 @@ fun HomeScreen() {
                         FavouriteListItem(quote = it,
                                           favouriteItemClicked = {
                                               quotesViewModel.viewFavouriteQuote(it)
-                                          },
-                                          favouriteItemLongClicked = {
-                                              // todo: share
                                           })
                     }
                 }

@@ -1,7 +1,7 @@
 package com.yquery.quote_of_the_day.presentation.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
@@ -18,17 +18,13 @@ import com.yquery.quote_of_the_day.data.domain.Quote
 fun FavouriteListItem(
     quote: Quote,
     favouriteItemClicked: () -> Unit,
-    favouriteItemLongClicked: () -> Unit
 ) {
 
     ElevatedCard(
         modifier = Modifier
             .padding(18.dp)
             .fillMaxWidth()
-            .combinedClickable(
-                onClick = { favouriteItemClicked() },
-                onLongClick = { favouriteItemLongClicked() },
-            ),
+            .clickable { favouriteItemClicked() }
     ) {
 
         Text(
