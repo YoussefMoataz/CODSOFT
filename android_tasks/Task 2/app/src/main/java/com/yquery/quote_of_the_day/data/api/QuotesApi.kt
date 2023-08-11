@@ -1,6 +1,6 @@
-package com.yquery.quoto_of_the_day.data
+package com.yquery.quote_of_the_day.data.api
 
-import com.yquery.quoto_of_the_day.domain.Quote
+import com.yquery.quote_of_the_day.data.api.domain.Quote
 import retrofit2.Response
 import retrofit2.http.GET
 

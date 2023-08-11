@@ -1,7 +1,7 @@
-package com.yquery.quoto_of_the_day.retrofit
+package com.yquery.quote_of_the_day.data.api.retrofit
 
-import com.yquery.quoto_of_the_day.core.Constants.BASE_URL
-import com.yquery.quoto_of_the_day.data.QuotesApi
+import com.yquery.quote_of_the_day.core.Constants.BASE_URL
+import com.yquery.quote_of_the_day.data.api.QuotesApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

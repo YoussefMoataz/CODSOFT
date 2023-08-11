@@ -1,4 +1,4 @@
-package com.yquery.quoto_of_the_day
+package com.yquery.quote_of_the_day
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

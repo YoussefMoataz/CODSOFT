@@ -1,4 +1,4 @@
-package com.yquery.quoto_of_the_day.ui.theme
+package com.yquery.quote_of_the_day.ui.theme
 
 import android.app.Activity
 import android.os.Build

@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Quoto-Of-The-Day"
+rootProject.name = "Quote-Of-The-Day"
 include(":app")

@@ -1,4 +1,4 @@
-package com.yquery.quoto_of_the_day
+package com.yquery.quote_of_the_day
 
 import org.junit.Test
 
