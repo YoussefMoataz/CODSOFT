@@ -29,6 +29,8 @@ class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao) : Vi
 
         if (_currentQuote.value == null) {
 
+            _currentQuote.value = Quote(-1, "", "Quote Of The Day", "Loading Quote...")
+
             _isRefreshing.value = true
 
             viewModelScope.launch {

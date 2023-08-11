@@ -4,9 +4,8 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -46,24 +45,21 @@ fun FavouriteListItem(
 //
 //    }
 
-    OutlinedCard(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth()
-            .clickable { favouriteItemClicked() }
-    ) {
-        androidx.compose.material3.ListItem(
-            headlineText = {
-                Text(
-                    text = quote.author,
-                )
-            },
-            supportingText = {
-                Text(
-                    text = quote.content,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-            })
-    }
+    androidx.compose.material3.ListItem(modifier = Modifier
+        .clickable { favouriteItemClicked() },
+                                        headlineText = {
+                                            Text(
+                                                text = quote.author,
+                                            )
+                                        },
+                                        supportingText = {
+                                            Text(
+                                                text = quote.content,
+                                                maxLines = 2,
+                                                overflow = TextOverflow.Ellipsis
+                                            )
+                                        })
+
+    Divider()
+
 }
