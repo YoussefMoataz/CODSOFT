@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.yquery.quote_of_the_day.data.api.domain.Quote
 import com.yquery.quote_of_the_day.data.api.retrofit.RetrofitQuotesClient
 import com.yquery.quote_of_the_day.data.persistent.QuotesDao
+import com.yquery.quote_of_the_day.data.persistent.domain.FavouriteQuote
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,11 +15,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao): ViewModel() {
+class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao) : ViewModel() {
 
     private val quotesApi = RetrofitQuotesClient.getInstance()
 
     private val _currentQuote = MutableStateFlow<Quote?>(null)
+    private val favourites = MutableStateFlow<List<FavouriteQuote>>(emptyList())
 
     fun getQuote(): StateFlow<Quote?> {
 
@@ -29,6 +31,15 @@ class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao): Vie
                     _currentQuote.update {
                         response.body()
                     }
+                    response.body()?.let {
+                        quotesDao.addToFavourites(
+                            FavouriteQuote(
+                                it.id,
+                                it.author,
+                                it.content
+                            )
+                        )
+                    }
                 }
             }
         }
@@ -37,9 +48,20 @@ class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao): Vie
 
     }
 
-    fun refreshQuote(){
+    fun refreshQuote() {
         _currentQuote.value = null
         getQuote()
+        getFavourites()
+    }
+
+    fun getFavourites(): StateFlow<List<FavouriteQuote>?> {
+
+        viewModelScope.launch {
+            favourites.value = quotesDao.getFavourites()
+        }
+
+        return favourites.asStateFlow()
+
     }
 
 }
