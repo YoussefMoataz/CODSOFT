@@ -32,14 +32,16 @@ class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao) : Vi
             _isRefreshing.value = true
 
             viewModelScope.launch {
-                val response = quotesApi.getQuote()
-                if (response.isSuccessful) {
-                    _currentQuote.update {
-                        response.body()
+                try {
+                    val response = quotesApi.getQuote()
+                    if (response.isSuccessful) {
+                        _currentQuote.update {
+                            response.body()
+                        }
                     }
+                    _isRefreshing.value = false
+                }catch (_: Exception){
                 }
-
-                _isRefreshing.value = false
             }
         }
 

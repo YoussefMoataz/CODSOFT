@@ -3,6 +3,8 @@ package com.yquery.quote_of_the_day.presentation
 import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -29,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yquery.quote_of_the_day.R
 import com.yquery.quote_of_the_day.presentation.components.FavouriteListItem
@@ -54,11 +57,16 @@ fun HomeScreen() {
         topBar = {
             CenterAlignedTopAppBar(title = {
                 Text(text = stringResource(id = R.string.app_name))
-            }, actions = {
-                IconButton(onClick = { quotesViewModel.refreshQuote() }) {
-                    Icon(imageVector = Icons.Rounded.Refresh, contentDescription = "Refresh Quote")
-                }
-            })
+            },
+//                                   actions = {
+//                                       IconButton(onClick = { quotesViewModel.refreshQuote() }) {
+//                                           Icon(
+//                                               imageVector = Icons.Rounded.Refresh,
+//                                               contentDescription = "Refresh Quote"
+//                                           )
+//                                       }
+//                                   }
+            )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
@@ -84,6 +92,8 @@ fun HomeScreen() {
 
             Column {
 
+                Spacer(modifier = Modifier.height(Dp(16F)))
+
                 QuoteCard(quote = quote, quoteCardLongClicked = {
                     val sendIntent: Intent = Intent().apply {
                         action = Intent.ACTION_SEND
@@ -94,6 +104,7 @@ fun HomeScreen() {
                     context.startActivity(Intent.createChooser(sendIntent, null))
                 })
 
+                Spacer(modifier = Modifier.height(Dp(10F)))
                 Divider()
 
                 LazyColumn {

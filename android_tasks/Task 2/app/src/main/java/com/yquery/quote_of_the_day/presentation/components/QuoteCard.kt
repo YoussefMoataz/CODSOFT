@@ -19,7 +19,7 @@ fun QuoteCard(quote: Quote?, quoteCardLongClicked: () -> Unit) {
 
     Card(
         modifier = Modifier
-            .padding(18.dp)
+            .padding(10.dp, 36.dp)
             .fillMaxWidth()
             .combinedClickable(onClick = {},
                                onLongClick = { quoteCardLongClicked() })
