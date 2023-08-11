@@ -1,12 +1,12 @@
-package com.yquery.tasked2.viewmodels
+package com.yquery.codsoft_tasked2.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.yquery.tasked2.data.TasksRepository
-import com.yquery.tasked2.database.AppDatabase
-import com.yquery.tasked2.models.Task
+import com.yquery.codsoft_tasked2.data.TasksRepository
+import com.yquery.codsoft_tasked2.database.AppDatabase
+import com.yquery.codsoft_tasked2.models.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

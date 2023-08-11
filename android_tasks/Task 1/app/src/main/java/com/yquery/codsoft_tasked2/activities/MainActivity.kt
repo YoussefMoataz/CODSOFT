@@ -1,4 +1,4 @@
-package com.yquery.tasked2.activities
+package com.yquery.codsoft_tasked2.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,11 +16,11 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import com.yquery.tasked2.R
-import com.yquery.tasked2.adapters.TasksAdapter
-import com.yquery.tasked2.databinding.ActivityMainBinding
-import com.yquery.tasked2.models.Task
-import com.yquery.tasked2.viewmodels.TasksViewModel
+import com.yquery.codsoft_tasked2.R
+import com.yquery.codsoft_tasked2.adapters.TasksAdapter
+import com.yquery.codsoft_tasked2.databinding.ActivityMainBinding
+import com.yquery.codsoft_tasked2.models.Task
+import com.yquery.codsoft_tasked2.viewmodels.TasksViewModel
 import java.util.Calendar
 
 
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
                     vmodel.deleteTaskByID(deletedTask.taskID)
 
-                    Snackbar.make(binding.root, "Task Deleted", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(binding.root, "Task Deleted", Snackbar.LENGTH_LONG)
                         .setAction("Undo") {
 
                             vmodel.insertTask(deletedTask)

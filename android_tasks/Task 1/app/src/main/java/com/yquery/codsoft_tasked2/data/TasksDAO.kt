@@ -1,8 +1,8 @@
-package com.yquery.tasked2.data
+package com.yquery.codsoft_tasked2.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.yquery.tasked2.models.Task
+import com.yquery.codsoft_tasked2.models.Task
 import kotlinx.coroutines.flow.Flow
 
 @Dao

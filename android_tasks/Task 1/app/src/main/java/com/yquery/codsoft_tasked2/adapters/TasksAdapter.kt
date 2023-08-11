@@ -1,4 +1,4 @@
-package com.yquery.tasked2.adapters
+package com.yquery.codsoft_tasked2.adapters
 
 import android.content.Context
 import android.graphics.Paint
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textview.MaterialTextView
-import com.yquery.tasked2.R
-import com.yquery.tasked2.models.Task
+import com.yquery.codsoft_tasked2.R
+import com.yquery.codsoft_tasked2.models.Task
 import net.igenius.customcheckbox.CustomCheckBox
 import java.util.Calendar
 

@@ -1,4 +1,4 @@
-package com.yquery.tasked2.activities
+package com.yquery.codsoft_tasked2.activities
 
 import android.graphics.Paint
 import android.os.Bundle
@@ -14,10 +14,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import com.yquery.tasked2.R
-import com.yquery.tasked2.databinding.ActivityEditTaskBinding
-import com.yquery.tasked2.models.Task
-import com.yquery.tasked2.viewmodels.TasksViewModel
+import com.yquery.codsoft_tasked2.R
+import com.yquery.codsoft_tasked2.databinding.ActivityEditTaskBinding
+import com.yquery.codsoft_tasked2.models.Task
+import com.yquery.codsoft_tasked2.viewmodels.TasksViewModel
 import kotlinx.coroutines.runBlocking
 import java.util.Calendar
 

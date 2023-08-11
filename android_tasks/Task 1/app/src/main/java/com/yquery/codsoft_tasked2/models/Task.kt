@@ -1,4 +1,4 @@
-package com.yquery.tasked2.models
+package com.yquery.codsoft_tasked2.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
