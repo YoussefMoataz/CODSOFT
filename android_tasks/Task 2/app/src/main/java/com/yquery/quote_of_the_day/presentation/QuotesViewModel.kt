@@ -2,6 +2,7 @@ package com.yquery.quote_of_the_day.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yquery.quote_of_the_day.core.Constants
 import com.yquery.quote_of_the_day.data.api.retrofit.RetrofitQuotesClient
 import com.yquery.quote_of_the_day.data.domain.Quote
 import com.yquery.quote_of_the_day.data.persistent.QuotesDao
@@ -11,6 +12,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,20 +33,45 @@ class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao) : Vi
 
         if (_currentQuote.value == null) {
 
-            _currentQuote.value = Quote(-1, "", "Quote Of The Day", "Loading Quote...")
+            _currentQuote.value = Quote(
+                id = Constants.REFRESHING_QUOTE_ID,
+                quoteID = "",
+                author = "Quote Of The Day",
+                content = "Loading Quote..."
+            )
 
             _isRefreshing.value = true
 
             viewModelScope.launch {
                 try {
-                    val response = quotesApi.getQuote()
-                    if (response.isSuccessful) {
-                        _currentQuote.update {
-                            response.body()
+//                    val response = quotesApi.getQuote()
+//                    if (response.isSuccessful) {
+//                        _currentQuote.update {
+//                            response.body()
+//                        }
+//                    }
+
+                    quotesApi.getQuote().enqueue(object : Callback<Quote> {
+                        override fun onResponse(call: Call<Quote>, response: Response<Quote>) {
+                            print(response.body())
+                            _currentQuote.update {
+                                response.body()
+                            }
                         }
-                    }
+
+                        override fun onFailure(call: Call<Quote>, t: Throwable) {
+                            _currentQuote.value = Quote(
+                                id = Constants.CONNECTION_ERROR_ID,
+                                quoteID = "",
+                                author = "Quote Of The Day",
+                                content = "Failed to load quote! Please check your Internet connection."
+                            )
+                        }
+
+                    })
+
                     _isRefreshing.value = false
-                }catch (_: Exception){
+                } catch (_: Exception) {
                 }
             }
         }
@@ -89,7 +118,7 @@ class QuotesViewModel @Inject constructor(private val quotesDao: QuotesDao) : Vi
         return _favouriteState.asStateFlow()
     }
 
-    fun viewFavouriteQuote(quote: Quote){
+    fun viewFavouriteQuote(quote: Quote) {
         _currentQuote.value = quote
     }
 
