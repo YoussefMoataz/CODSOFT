@@ -88,7 +88,7 @@ fun HomeScreen() {
                           quoteShare = {
                               val sendIntent: Intent = Intent().apply {
                                   action = Intent.ACTION_SEND
-                                  putExtra(Intent.EXTRA_TEXT, quote?.content)
+                                  putExtra(Intent.EXTRA_TEXT, "${quote?.content}\n-${quote?.author}")
                                   type = "text/plain"
                               }
 
