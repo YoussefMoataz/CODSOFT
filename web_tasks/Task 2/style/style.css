@@ -1,0 +1,92 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    height: 98%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(344deg, rgba(2, 0, 36, 1) 0%, rgba(81, 144, 111, 1) 0%, rgba(255, 170, 174, 1) 100%);
+}
+
+h1 {
+    margin-top: 2%;
+}
+
+input {
+    padding: 1%;
+}
+
+input[type="text"] {
+    font-size: 1.1rem;
+    width: 60%;
+    margin-right: 1%;
+    border-radius: 6px;
+    border-style: solid;
+    border-color: black;
+}
+
+input[type="button"] {
+    font-size: 1.1rem;
+    width: 20%;
+    margin-left: 1%;
+    border-radius: 6px;
+    border-style: solid;
+    border: none;
+    background-color: rgb(184, 211, 184);
+}
+
+.container {
+    background-color: rgb(249, 249, 249);
+    border-radius: 18px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.18), 0 6px 18px 2px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        width: 55%;
+        height: 90%;
+        max-height: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        height: 90%;
+        max-height: 90%;
+    }
+}
+
+.todos-card {
+    width: 100%;
+    /* background-color: antiquewhite; */
+    max-height: 90%;
+    display: grid;
+    justify-items: center;
+}
+
+.main-title {
+    margin-top: 2%;
+}
+
+.main-inputs {
+    margin-top: 2%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.items-container {
+    margin-top: 4%;
+    max-height: 50%;
+    width: 80%;
+    /* background-color: blue; */
+    overflow-y: auto;
+}
