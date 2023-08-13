@@ -87,7 +87,27 @@ input[type="button"] {
     margin-top: 4%;
     max-height: 20rem;
     /* height: 20%; */
-    width: 80%;
+    width: 100%;
     /* background-color: blue; */
     overflow-y: auto;
+}
+
+li{
+    list-style: none;
+    margin: 1rem;
+    font-size: 1.4rem;
+    overflow: auto;
+}
+
+li div {
+    display: flex;
+    justify-content: right;
+}
+
+li input[type="button"]{
+    background-color: hsl(0, 100%, 81%);
+}
+
+p{
+    display: inline;
 }

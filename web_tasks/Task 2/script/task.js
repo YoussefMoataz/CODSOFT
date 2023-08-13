@@ -4,9 +4,4 @@ class Task{
         this.title = Title;
         this.isCompleted = false;
     }
-
-    setCompleted(status) {
-        this.isCompleted = status;
-    }
-
 }

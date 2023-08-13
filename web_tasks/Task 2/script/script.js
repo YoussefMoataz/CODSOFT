@@ -30,12 +30,21 @@ $(document).ready(function () {
             } else {
                 // update task
 
-                tasksList[currentTaskID] = new Task(currentTaskID, $("#inputTask").val());
+                tasksList[currentTaskID].title = $("#inputTask").val();
                 storage.setItem("tasks_list", JSON.stringify(tasksList));
                 refreshList(tasksList);
             }
+
+            $("#inputTask").val("");
         }
 
+        currentTaskID = -1;
+
+    });
+
+    $("#clearTask").on("click", function () {
+        $("#inputTask").val("");
+        currentTaskID = -1;
     });
 
 });
@@ -43,7 +52,18 @@ $(document).ready(function () {
 function refreshList(tasksList) {
     let new_ul = [];
     tasksList.forEach(task => {
-        new_ul.push("<li id=\"" + task.id + "\">" + task.title + " - " + task.isCompleted + "</li>");
+
+        var isChecked = "";
+        if (task.isCompleted) {
+            isChecked = "checked";
+        }
+
+        new_ul.push("<li id=\"" + task.id + "\">"
+            + "<input type=\"checkbox\" class=\"" + task.id + "\"" + isChecked + ">"
+            + task.title
+            + "<div><input type=\"button\" value=\"Delete\" class=\"deleteButton " + task.id + "\"></div>"
+            + "</li>"
+            + "<hr>");
     })
 
     $('.items-container').html("<ul class=\"items-list\">" + new_ul.join("") + "</ul>")
@@ -53,6 +73,33 @@ function refreshList(tasksList) {
         currentTaskID = id;
         $("#inputTask").val(tasksList[currentTaskID].title);
     });
+
+    $("input[type=\"checkbox\"]").change(function () {
+        let id = $(this).attr('class');
+        currentTaskID = parseInt(id);
+        tasksList[currentTaskID].isCompleted = ($(this).is(":checked"));
+        storage.setItem("tasks_list", JSON.stringify(tasksList));
+    });
+
+    $(".deleteButton").on("click", function () {
+        let id = $(this).attr('class').split(" ")[1];
+        currentTaskID = parseInt(id);
+
+        if (confirm("Are you sure you want to delete this task ?")) {
+            tasksList.splice(currentTaskID, 1);
+
+            for (i = 0; i < tasksList.length; i++) {
+                tasksList[i].id = i;
+
+            }
+
+            storage.setItem("tasks_list", JSON.stringify(tasksList));
+            $("#inputTask").val("");
+            currentTaskID = -1;
+            refreshList(tasksList);
+        }
+    });
+
 }
 
 function findTask(tasksList, taskID) {
