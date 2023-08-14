@@ -10,6 +10,11 @@ $(document).ready(function () {
             $("#diaplay").val(function (index, value) {
                 return this.value.substr(0, value.length - 1);
             });
+
+            if ($("#diaplay").val() == "") {
+                $("#diaplay").val("0");
+            }
+
             return;
         } else if (currentKey == "=") {
             $("#diaplay").val(calculate($("#diaplay").val()));
