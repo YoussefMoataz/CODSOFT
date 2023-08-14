@@ -16,7 +16,7 @@ $(document).ready(function () {
             return;
         }
 
-        if($("#diaplay").val() == "0"){
+        if ($("#diaplay").val() == "0") {
             $("#diaplay").val("");
         }
 
@@ -27,14 +27,6 @@ $(document).ready(function () {
 
 });
 
-function calculate(exp){
-
-    let result = 0.0;
-
-    let numbers = [];
-    let operators = [];
-
-    // calculations here
-
-    return result;
+function calculate(exp) {
+    return new Calculator().evaluate(exp)
 }
