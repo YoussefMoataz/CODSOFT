@@ -1,3 +1,16 @@
+/*
+- Desciption: This calculator class works like a lexer and parser.
+    It can be used in any project like this, just include the JS file in your HTML.
+    I have built this class to work internally as a postfix expression evaluator.
+
+    *This class will also be available in Kotlin, check this GitHub repo: 
+    https://github.com/YoussefMoataz/Expression-Evaluator-Kotlin
+
+- Date: Aug 14, 2023
+- Author: Youssef Moataz
+- Version: 1.0.0
+*/
+
 class Calculator {
     getPrecedence(operator) {
         switch (operator) {
