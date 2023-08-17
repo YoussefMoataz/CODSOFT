@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import com.yquery.quote_of_the_day.core.Constants
 import com.yquery.quote_of_the_day.data.domain.Quote
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun QuoteCard(
     quote: Quote?,
@@ -63,6 +62,7 @@ fun QuoteCard(
     ) {
 
         Card(
+            modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceVariant
             )
@@ -79,7 +79,7 @@ fun QuoteCard(
                     modifier = Modifier.padding(14.dp),
                     fontSize = MaterialTheme.typography.headlineMedium.fontSize,
                     lineHeight = MaterialTheme.typography.headlineMedium.lineHeight,
-                    color = textColor
+                    color = textColor,
                 )
             }
 
