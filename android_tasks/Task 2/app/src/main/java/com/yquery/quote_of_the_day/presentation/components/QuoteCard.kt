@@ -1,11 +1,19 @@
 package com.yquery.quote_of_the_day.presentation.components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.SpringSpec
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -24,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import com.yquery.quote_of_the_day.core.Constants
 import com.yquery.quote_of_the_day.data.domain.Quote
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
 @Composable
 fun QuoteCard(
     quote: Quote?,
@@ -42,22 +50,38 @@ fun QuoteCard(
     Card(
         modifier = Modifier
             .padding(start = 10.dp, end = 10.dp, bottom = 8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .animateContentSize(
+                animationSpec = SpringSpec(
+                    dampingRatio = Spring.DampingRatioLowBouncy,
+                    stiffness = Spring.StiffnessLow
+                )
+            ),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant
         )
     ) {
 
-        Card(colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )) {
-            Text(
-                text = quote?.content ?: "",
-                modifier = Modifier.padding(14.dp),
-                fontSize = MaterialTheme.typography.headlineMedium.fontSize,
-                lineHeight = MaterialTheme.typography.headlineMedium.lineHeight,
-                color = textColor
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
             )
+        ) {
+
+            AnimatedContent(targetState = quote?.content ?: "",
+                            label = "",
+                            transitionSpec = {
+                                fadeIn(animationSpec = tween(300)) togetherWith
+                                        fadeOut(animationSpec = tween(300))
+                            }) {
+                Text(
+                    text = it,
+                    modifier = Modifier.padding(14.dp),
+                    fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                    lineHeight = MaterialTheme.typography.headlineMedium.lineHeight,
+                    color = textColor
+                )
+            }
 
             Text(
                 text = "-${quote?.author}" ?: "",
