@@ -2,7 +2,6 @@ package com.yquery.quote_of_the_day.presentation.components
 
 import android.content.Context
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.SpringSpec
@@ -10,7 +9,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -41,7 +40,8 @@ import dev.shreyaspatil.capturable.controller.CaptureController
 fun QuoteCard(
     quote: Quote?,
     isFavourite: Boolean,
-    quoteShare: () -> Unit,
+    quoteShareText: () -> Unit,
+    quoteShareImage: () -> Unit,
     quoteToggleFavourite: () -> Unit,
     context: Context,
     captureController: CaptureController
@@ -120,10 +120,21 @@ fun QuoteCard(
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
 
-                IconButton(modifier = Modifier.padding(4.dp, 0.dp), onClick = { quoteShare() }) {
+                IconButton(
+                    modifier = Modifier.padding(4.dp, 0.dp),
+                    onClick = { quoteShareText() }) {
                     Icon(
                         imageVector = Icons.Rounded.Share,
-                        contentDescription = "Share"
+                        contentDescription = "Share as text"
+                    )
+                }
+
+                IconButton(
+                    modifier = Modifier.padding(4.dp, 0.dp),
+                    onClick = { quoteShareImage() }) {
+                    Icon(
+                        imageVector = Icons.Rounded.Send,
+                        contentDescription = "Share as image"
                     )
                 }
 

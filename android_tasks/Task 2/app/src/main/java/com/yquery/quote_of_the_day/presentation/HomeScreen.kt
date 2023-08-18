@@ -1,5 +1,6 @@
 package com.yquery.quote_of_the_day.presentation
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -86,25 +87,28 @@ fun HomeScreen() {
 
                 Spacer(modifier = Modifier.height(Dp(10F)))
 
-                QuoteCard(quote = quote, isFavourite = isFavourite,
-                          quoteShare = {
-//                                  val sendIntent: Intent = Intent().apply {
-//                                      action = Intent.ACTION_SEND
-//                                      putExtra(
-//                                          Intent.EXTRA_TEXT,
-//                                          "${quote?.content}\n-${quote?.author}"
-//                                      )
-//                                      type = "text/plain"
-//                                  }
-//                                  context.startActivity(Intent.createChooser(sendIntent, null))
-
-                              captureController.capture()
-                          },
-                          quoteToggleFavourite = {
-                              quote?.let { quotesViewModel.changeFavouriteStatus(it) }
-                          },
-                          context = context,
-                          captureController = captureController)
+                QuoteCard(
+                    quote = quote, isFavourite = isFavourite,
+                    quoteShareText = {
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(
+                                Intent.EXTRA_TEXT,
+                                "${quote?.content}\n-${quote?.author}"
+                            )
+                            type = "text/plain"
+                        }
+                        context.startActivity(Intent.createChooser(sendIntent, null))
+                    },
+                    quoteShareImage = {
+                        captureController.capture()
+                    },
+                    quoteToggleFavourite = {
+                        quote?.let { quotesViewModel.changeFavouriteStatus(it) }
+                    },
+                    context = context,
+                    captureController = captureController
+                )
 
 
                 Spacer(modifier = Modifier.height(Dp(8F)))
