@@ -97,6 +97,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
     implementation("androidx.compose.material:material:1.5.0")
+
+    implementation("dev.shreyaspatil:capturable:1.0.3")
+
 }
 
 hilt {

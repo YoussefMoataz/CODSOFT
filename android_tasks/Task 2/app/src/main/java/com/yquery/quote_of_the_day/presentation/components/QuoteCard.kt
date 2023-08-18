@@ -1,5 +1,6 @@
 package com.yquery.quote_of_the_day.presentation.components
 
+import android.content.Context
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
@@ -28,16 +29,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.unit.dp
 import com.yquery.quote_of_the_day.core.Constants
+import com.yquery.quote_of_the_day.core.ShareUtils
 import com.yquery.quote_of_the_day.data.domain.Quote
+import dev.shreyaspatil.capturable.Capturable
+import dev.shreyaspatil.capturable.controller.CaptureController
 
 @Composable
 fun QuoteCard(
     quote: Quote?,
     isFavourite: Boolean,
     quoteShare: () -> Unit,
-    quoteToggleFavourite: () -> Unit
+    quoteToggleFavourite: () -> Unit,
+    context: Context,
+    captureController: CaptureController
 ) {
 
     val textColor = if (quote?.id == Constants.CONNECTION_ERROR_ID) {
@@ -61,36 +68,50 @@ fun QuoteCard(
         )
     ) {
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
-            )
-        ) {
+        Capturable(
+            controller = captureController,
+            onCaptured = { bitmap, error ->
+                // This is captured bitmap of a content inside Capturable Composable.
+                if (bitmap != null) {
+                    ShareUtils.shareImageToOthers(context, "", bitmap.asAndroidBitmap())
+                }
 
-            AnimatedContent(targetState = quote?.content ?: "",
-                            label = "",
-                            transitionSpec = {
-                                fadeIn(animationSpec = tween(300)) togetherWith
-                                        fadeOut(animationSpec = tween(300))
-                            }) {
+                if (error != null) {
+                    println("error onCaptured")
+                }
+            }
+        ) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            ) {
+
+                AnimatedContent(targetState = quote?.content ?: "",
+                                label = "",
+                                transitionSpec = {
+                                    fadeIn(animationSpec = tween(300)) togetherWith
+                                            fadeOut(animationSpec = tween(300))
+                                }) {
+                    Text(
+                        text = it,
+                        modifier = Modifier.padding(14.dp),
+                        fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                        lineHeight = MaterialTheme.typography.headlineMedium.lineHeight,
+                        color = textColor,
+                    )
+                }
+
                 Text(
-                    text = it,
-                    modifier = Modifier.padding(14.dp),
-                    fontSize = MaterialTheme.typography.headlineMedium.fontSize,
-                    lineHeight = MaterialTheme.typography.headlineMedium.lineHeight,
-                    color = textColor,
+                    text = "-${quote?.author}" ?: "",
+                    modifier = Modifier
+                        .padding(end = 14.dp, top = 4.dp, bottom = 6.dp)
+                        .align(Alignment.End),
+                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                    color = textColor
                 )
             }
-
-            Text(
-                text = "-${quote?.author}" ?: "",
-                modifier = Modifier
-                    .padding(end = 14.dp, top = 4.dp, bottom = 2.dp)
-                    .align(Alignment.End),
-                fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                color = textColor
-            )
         }
 
         if (quote?.id !in Constants.errorList) {
