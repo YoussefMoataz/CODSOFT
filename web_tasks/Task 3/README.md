@@ -3,7 +3,7 @@ My calculator contains:
 - My expression evaluator with:
   * Addition
   * Subtraction
-  * Multipication
+  * Multiplication
   * Division
 - Clear all
 - Clear last input
