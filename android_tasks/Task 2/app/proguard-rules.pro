@@ -20,11 +20,30 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+-keepclassmembernames interface * {
+    @retrofit2.http.* <methods>;
+}
+
+-dontwarn org.bouncycastle.jsse.BCSSLParameters
+-dontwarn org.bouncycastle.jsse.BCSSLSocket
+-dontwarn org.bouncycastle.jsse.provider.BouncyCastleJsseProvider
+-dontwarn org.conscrypt.Conscrypt$Version
+-dontwarn org.conscrypt.Conscrypt
+-dontwarn org.conscrypt.ConscryptHostnameVerifier
+-dontwarn org.openjsse.javax.net.ssl.SSLParameters
+-dontwarn org.openjsse.javax.net.ssl.SSLSocket
+-dontwarn org.openjsse.net.ssl.OpenJSSE
 
 # GSON Annotations
 -keepclassmembers class * {
   @com.google.gson.annotations.SerializedName <fields>;
 }
+
+-keepclasseswithmembers class com.yquery.quote_of_the_day.data.domain.** { *; }
+-keepclasseswithmembers class com.yquery.quote_of_the_day.data.domain.Quote
 
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
