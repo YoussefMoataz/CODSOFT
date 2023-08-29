@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+# GSON Annotations
+-keepclassmembers class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
