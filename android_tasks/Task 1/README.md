@@ -7,5 +7,5 @@ My to-do list app contains:
 - Delete task
 - Set task due date
 - Set task due time
-- Mark task as deleted
+- Mark task as completed
 - Swipe task to delete (reversible)
